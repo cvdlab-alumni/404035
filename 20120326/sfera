@@ -1,0 +1,124 @@
+var c= CUBOID([1,2,3]) //crea il cubo
+
+DRAW(c); //mostra  l'oggetto su plasm.js
+
+DOMAIN([[1.5,5.5]])([4]) //CREA IL DOMINIO, PRIMO PARAMETRO LISTA CHE INDICA COPPIE DI INIZIO E FINE INTERVALLO, (4) NUMERO DI VISIONE DEL DOMINIO
+
+HIDE(c) //elimina c dallo schermo)
+
+SHOW(c) // mostra l'oggetto nascosto c
+
+COLOR([r,g,b])(c);
+
+var domain2 = DOMAIN([[1.5,5.5],[1,3]])([4,2])
+
+var domain3 = DOMAIN([[1.5,5.5],[1,3],[0,1]])([4,2,1])
+
+---------------
+
+var dominio = DOMAIN([[0,1]])([10]);
+
+var mapping = function(p){
+	var u =p[0];
+
+	return [u, 1];
+};//funzione eseguita su tutti i punti del dominio , ogni punto viene traslato di uno sull'asse y
+
+var mapped = MAP(mapping)(dominio);
+-----------
+disegna bisettrice primo quadrante
+
+var drawBisettrice = function(){
+
+	var domain = DOMAIN([[0,5]])([10]);
+
+	var mapping = function(p){
+	 var u = p[0];
+
+   return [u,u];
+	}
+
+  var bisettrice = MAP(mapping)(domain);
+
+  DRAW(bisettrice);
+}
+----------
+disegna sinusoide tra 0 e 2pi su x e y
+
+var drawSinu = function(){
+
+  var dom = DOMAIN([[0, 2*PI]])([50]);
+
+  var sinu = function(p){
+	 var u = p[0];
+
+	 return [u, SIN(u)];
+  }
+
+  var mapped = MAP(sinu)(dom);
+
+  COLOR([255,0,0])(mapped)
+  DRAW(mapped);
+
+  }
+
+--------
+
+cerchio raggio r e n intervalli
+
+var domain = DOMAIN([[0, r*2*PI]])([100]);
+var mapping = function(p){
+	var u = p[0];
+	return [r*COS(u), r*SIN(u)];
+};
+
+//provo io - FATTO BENE
+var drawCircle = function(r){
+  var domain = DOMAIN([[0,2*r*PI]])([300]);
+
+  var mapping = function(p){
+    var u = p[0];
+    var x = r*COS(u);
+    var y = r*SIN(u);
+    return[x,y];
+  }
+
+  var cerchio = MAP(mapping)(domain);
+
+  COLOR([255,0,0])(cerchio);
+
+  DRAW(cerchio);
+}
+
+---
+superficie bidimensionale piegarla per avere un cilindro
+
+var draw_cilindro = function (r,h,color){
+  var domain = DOMAIN([[0, 2*PI*r],[0,h]])([200,200]);
+  var mapping_function = function (p){
+    var x = p[0];
+    var y = p[1];
+
+    return [r*COS(x),r*SIN(x),y]; 
+  }
+  var cilindro = MAP(mapping_function)(domain);
+  COLOR(color)(cilindro);
+  DRAW(cilindro);
+}
+----
+sfera z = raggio * sin alfa
+
+var drawSfera = function(r){
+  var domain = DOMAIN([[0,2*PI*r],[0,2*PI*r]])([200,200]);
+
+  var mapping = function(p){
+    var u = p[0];
+    var v = p[1];
+
+    return [r*COS(u)*COS(v),r*COS(u)*SIN(v), r*SIN(u)];
+  }
+
+  var sfera = MAP(mapping)(domain);
+
+  DRAW(sfera);
+}
