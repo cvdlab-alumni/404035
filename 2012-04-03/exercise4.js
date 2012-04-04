@@ -1,5 +1,5 @@
 /**
- * Esercizio 2: Grafica 3D del Barcellona pavilion
+ * Esercizio 4: Grafica 3D del Barcellona pavilion
  */
 
 /**
